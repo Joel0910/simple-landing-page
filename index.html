@@ -52,19 +52,19 @@
 
       <!-- info panel -->
       <div class="row justify-content-center">
-        <div class="col-10 info-panel">
+        <div class="col-10 info-panel scroll-animate">
           <div class="row">
-            <div class="col-sm">
+            <div class="col-sm scroll-animate scroll-animate-delay-1">
               <img src="img/employee.png" alt="Employee" class="img-fluid float-left">
               <h4>24 Hours</h4>
               <p>Lorem ipsum dolor sit amet.</p>
             </div>
-            <div class="col-lg">
+            <div class="col-lg scroll-animate scroll-animate-delay-2">
               <img src="img/hires.png" alt="HiRes" class="img-fluid float-left">
               <h4>High-Res</h4>
               <p>Lorem ipsum dolor sit amet.</p>
             </div>
-            <div class="col-lg">
+            <div class="col-lg scroll-animate scroll-animate-delay-3">
               <img src="img/security.png" alt="Security" class="img-fluid float-left">
               <h4>Security</h4>
               <p>Lorem ipsum dolor sit amet.</p>
@@ -77,10 +77,10 @@
 
       <!-- Workingspace -->
       <div class="row workingspace">
-        <div class="col-lg-6">
+        <div class="col-lg-6 scroll-slide-left">
           <img src="img/workingspace.png" alt="Working Space" class="img-fluid">
         </div>
-        <div class="col-lg-5">
+        <div class="col-lg-5 scroll-slide-right">
           <h2>You <span>Work</span> Like at <span>Home</span></h2>
           <p>Bekerja dengan suasana hati yang lebih asik, menyenangkan
             dan mempelajari hal baru setiap harinya.</p>
@@ -93,11 +93,11 @@
       <!-- Testimonial -->
       <section class="testimonial">
         <div class="row justify-content-center">
-          <div class="col-lg-8">
+          <div class="col-lg-8 scroll-animate">
             <p>"Bekerja dengan suasana hati yang lebih asik dan mempelajari hal baru setiap harinya."</p>
           </div>
         </div>
-        <div class="row justify-content-center">
+        <div class="row justify-content-center scroll-animate scroll-animate-delay-1">
           <div class="col-lg-6 justify-content-center d-flex">
             <img src="img/img1.png" alt="Testimonial 1">
             <img src="img/img2.png" alt="Testimonial 2" class="img-main">
@@ -105,7 +105,7 @@
           </div>
         </div>
         <div class="row justify-content-center info-text">
-          <div class="col-lg text-center">
+          <div class="col-lg text-center scroll-animate scroll-animate-delay-2">
             <h5>Sunny Ye</h5>
             <p>Designer</p>
           </div>
@@ -127,5 +127,31 @@
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+    <!-- Scroll Animation with IntersectionObserver -->
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const observerOptions = {
+          root: null,
+          rootMargin: '0px',
+          threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('visible');
+              observer.unobserve(entry.target);
+            }
+          });
+        }, observerOptions);
+
+        // Observe all elements with scroll animation classes
+        const animatedElements = document.querySelectorAll(
+          '.scroll-animate, .scroll-slide-left, .scroll-slide-right'
+        );
+        animatedElements.forEach(el => observer.observe(el));
+      });
+    </script>
   </body>
 </html>
